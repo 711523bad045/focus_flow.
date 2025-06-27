@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎓 Study Task - FocusFlow</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .task-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f1f5f9;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .task-box.completed {
+      text-decoration: line-through;
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .task-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .task-actions button {
+      padding: 6px 10px;
+      font-size: 13px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .status-message {
+      font-size: 14px;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+
+    .task-list-title {
+      margin-top: 1.5rem;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <section class="academy-section">
+    <h2 style="color: #3b82f6;">🎓 Study Tasks</h2>
+    <p style="margin-bottom: 1rem;">Track lectures, exams, and study goals.</p>
+
+    <div class="calendar-reminder">
+      <label for="task-date">Select Date:</label>
+      <input type="date" id="task-date" />
+      <button id="remind-btn">Remind Me</button>
+      <p id="reminder-message"></p>
+    </div>
+
+    <div class="todo-container">
+      <input type="text" id="todo-input" placeholder="Add your task..." />
+      <button id="add-task-btn">Add</button>
+    </div>
+    <h3 class="task-list-title">📌 Pending Tasks</h3>
+    <div id="todo-list"></div>
+    <p id="no-pending-msg" class="status-message"></p>
+  </section>
+  <script>
+    const section = "academy";
+
+    function getUser() {
+      const users = JSON.parse(localStorage.getItem("allUsers") || "{}");
+      const email = localStorage.getItem("currentUser");
+      return users[email];
+    }
+
+    function saveUser(user) {
+      const users = JSON.parse(localStorage.getItem("allUsers") || "{}");
+      const email = localStorage.getItem("currentUser");
+      users[email] = user;
+      localStorage.setItem("allUsers", JSON.stringify(users));
+    }
+
+    function renderTasks() {
+      const user = getUser();
+      const all = user?.tasks?.[section] || [];
+
+      const todoList = document.getElementById("todo-list");
+      const doneList = document.getElementById("done-list");
+      const noPendingMsg = document.getElementById("no-pending-msg");
+      const noCompletedMsg = document.getElementById("no-completed-msg");
+
+      todoList.innerHTML = "";
+      doneList.innerHTML = "";
+
+      const pending = all.filter(t => !t.done);
+      const completed = all.filter(t => t.done);
+
+      pending.forEach((task, index) => {
+        const box = document.createElement("div");
+        box.className = "task-box";
+        box.innerHTML = `
+          <span>${task.text} (${task.date} ${task.time})</span>
+          <div class="task-actions">
+            <button class="btn-submit" onclick="completeTask(${index})">✔️ Done</button>
+            <button class="btn-delete" onclick="deleteTask(${index})">&times;</button>
+          </div>
+        `;
+        todoList.appendChild(box);
+      });
+
+      completed.forEach(task => {
+        const box = document.createElement("div");
+        box.className = "task-box completed";
+        box.textContent = `${task.text} (${task.date} ${task.time})`;
+        doneList.appendChild(box);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("todo-input");
+      const date = document.getElementById("task-date").value || new Date().toISOString().split("T")[0];
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const user = getUser();
+      if (!user) return;
+
+      user.tasks[section] = user.tasks[section] || [];
+      user.tasks[section].push({ text, date, time, done: false });
+      saveUser(user);
+
+      input.value = "";
+      renderTasks();
+    }
+    function checkTodayTask() {
+      const date = document.getElementById("task-date").value;
+      const msg = document.getElementById("reminder-message");
+      const user = getUser();
+
+      if (!date || !user?.tasks?.[section]) {
+        msg.textContent = "Please select a date.";
+        return;
+      }
+      const todayTasks = user.tasks[section].filter(t => t.date === date && !t.done);
+      msg.textContent = todayTasks.length
+        ? `📅 You have ${todayTasks.length} task(s) on ${date}.`
+        : `✅ No pending tasks on ${date}.`;
+    }
+    document.getElementById("add-task-btn").addEventListener("click", addTask);
+    document.getElementById("remind-btn").addEventListener("click", checkTodayTask);
+    renderTasks();
+  </script>
+</body>
+</html>

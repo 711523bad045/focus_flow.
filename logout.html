@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - FocusFlow</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>🚪 You have been logged out</h2>
+     <p>We hope to see you back soon. Stay focused. Stay productive!</p>
+    <form onsubmit="return registerUser()" aria-label="Sign Up Form">
+      <label for="newEmail">Email</label>
+      <input type="email" id="newEmail" placeholder="Enter your email" required />
+
+      <label for="newPassword">Password</label>
+      <input type="password" id="newPassword" placeholder="Create a password" required />
+
+      <button type="submit">Register</button>
+      <p id="signup-message" aria-live="polite"></p>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+  </div>
+
+  <script>
+    function registerUser() {
+      const email = document.getElementById("newEmail").value.trim();
+      const password = document.getElementById("newPassword").value.trim();
+      const message = document.getElementById("signup-message");
+
+      if (!email || !password) {
+        message.style.color = "red";
+        message.textContent = "Please fill in both fields.";
+        return false;
+      }
+
+      const allUsers = JSON.parse(localStorage.getItem("allUsers")) || {};
+
+      if (allUsers[email]) {
+        message.style.color = "red";
+        message.textContent = "User already exists. Please login.";
+        return false;
+      }
+
+      allUsers[email] = {
+        email,
+        password,
+        tasks: {
+          academy: [],
+          gaming: [],
+          self: []
+        }
+      };
+
+      localStorage.setItem("allUsers", JSON.stringify(allUsers));
+      message.style.color = "green";
+      message.textContent = "Registered successfully! Redirecting to login...";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+
+      return false;
+    }
+  </script>
+</body>
+</html>

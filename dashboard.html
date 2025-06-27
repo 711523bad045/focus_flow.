@@ -1,0 +1,75 @@
+<!-- Rain Animation Background -->
+<style>
+  .rain-container {
+    position: absolute;
+    top: 0;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: -1;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  
+  }
+</style>
+<div class="rain-container" id="rain"></div>
+<!-- Dashboard Welcome Section -->
+<div class="container mt-5 position-relative">
+  <div class="card shadow-lg bg-gradient text-white p-4 mb-5"
+       style="background: linear-gradient(to right, #6a11cb, #2575fc); border-radius: 1rem;">
+    <h2 class="mb-3">🎯 Stay Focused</h2>
+    <p class="mb-0">Unlock your full potential. Discipline is the bridge between goals and achievement.
+      Let <strong>FocusFlow</strong> guide your journey!</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Academy -->
+    <div class="col-md-6 col-xl-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">📚 Academy</h5>
+          <p class="card-text">Set reminders and manage academic tasks like assignments and exams efficiently.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gaming -->
+    <div class="col-md-6 col-xl-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-danger">🎮 Gaming</h5>
+          <p class="card-text">Fix your gaming hours, stay balanced, and enjoy guilt-free entertainment time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Study -->
+    <div class="col-md- col-xl-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-warning">📝 Study</h5>
+          <p class="card-text">Break study topics into goals and track progress. Organize chapters, notes, and sessions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Self-Growth -->
+    <div class="col-md-6 col-xl-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-success">🌱 Self-Growth</h5>
+          <p class="card-text">Build habits, practice mindfulness, read more, and keep growing every day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+
+
+

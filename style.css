@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1e1e2f;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Login/Logout Buttons */
+.auth-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.auth-controls .btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-btn {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.login-btn:hover {
+  background-color: #138496;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* User Info */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-details strong {
+  display: block;
+  font-size: 16px;
+}
+
+.user-details span {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Search */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 30px 8px 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.shortcut-key {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  color: #888;
+  font-size: 12px;
+}
+
+/* Nav */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #2e2e42;
+  color: #fff;
+}
+
+/* Main section */
+.main-section {
+  flex-grow: 1;
+  padding: 30px;
+}
+
+.main-section h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Academy Section */
+.academy-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.academy-section h2 {
+  margin-bottom: 15px;
+}
+
+/* Calendar Reminder */
+.calendar-reminder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.calendar-reminder input[type="date"] {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.calendar-reminder button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calendar-reminder button:hover {
+  background-color: #0056b3;
+}
+
+#reminder-message {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* To-Do List */
+.todo-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.todo-container input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.todo-container button {
+  padding: 8px 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.todo-container button:hover {
+  background-color: #1e7e34;
+}
+
+#todo-list {
+  margin-top: 15px;
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#todo-list li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.rain-container {
+  position: fixed;
+  top: 0;
+  left: 250px; /* keeps it behind the main area, not sidebar */
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+}
+ 
+
+
